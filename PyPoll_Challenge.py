@@ -30,13 +30,13 @@ county_votes = {}
 winning_county = ""
 winning_county_count = 0
 
-#Winning Candidate and Winning Count Tracker
+#Winning Candidate, Winning Count, and percentage Tracker
 winning_candidate = ""
 winning_candidate_count = 0
 winning_candidate_percentage = 0
 
 
-#DETERMINE THE TOTAL VOTES, CANDIDATES WITH VOTES, AND COUNTIES WITH VOTES
+#DETERMINE THE TOTAL VOTES, CANDIDATES LIST WITH VOTE COUNTS, AND COUNTY LIST WITH VOTE COUNTS
 # Open the election results and read the file.
 with open(file_to_load) as election_data:
 
@@ -47,9 +47,12 @@ with open(file_to_load) as election_data:
 
     # Print each row in the CSV file
     for row in file_reader:
+
+        # TOTAL VOTES
         # Add to the total vote counter
         total_votes += 1
 
+        # CANDIDATES
         # Print the candidate name for each row
         candidate_name = row[2]
 
@@ -62,6 +65,7 @@ with open(file_to_load) as election_data:
         # Otherwise, tally the votes for each candidate
         candidate_votes[candidate_name] += 1
 
+        # COUNTIES
         # Print the county name for each row
         county_name = row[1]
 
@@ -74,10 +78,11 @@ with open(file_to_load) as election_data:
         # Otherwise, tally the votes for each county
         county_votes[county_name] += 1
 
+# WRITING THE TEXT FILE
 # Save the results to our text file
 with open(file_to_save, "w") as txt_file:
 
-    # Print final vote count to the terminal and text file
+    # Print total vote count to the terminal and text file
     election_results = (
         f"\nElection Results\n"
         f"----------------------------\n"
@@ -93,6 +98,7 @@ with open(file_to_save, "w") as txt_file:
     # Print header for the the county votes in the terminal and text file
     print(f"County Votes:\n")
     txt_file.write(f"County Votes:\n")
+
 
     # Determine and print the percentage of votes for each county by looping through the count
     # Iterate through the county list
